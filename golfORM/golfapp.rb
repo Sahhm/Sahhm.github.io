@@ -1,10 +1,18 @@
+
+require "sinatra"
+require "sinatra/reloader"
+
 require "sqlite3"
+
+
 CONNECTION = SQLite3::Database.new("check.db")
 
 CONNECTION.results_as_hash = true
 require_relative "stores.rb"
 require_relative "clubcodes.rb"
 require_relative "clubs.rb"
+
+
 
 
 
@@ -54,10 +62,12 @@ while input != "q" do
     #to be combined into the new club code
     code = brand[0]+brand[1]+type[0]
     
-    
+    type_options = {"clubcode" => code, "clubtype" => type, "brand" => brand}
     #clubcode class runs the add method to populate the clubcodes table with a new code
-    ClubCode.add(code, type, brand)
     
+    
+    object = ClubCode.new(type_options)
+    object.add
     
   end
   
@@ -143,9 +153,13 @@ while input != "q" do
    
     #clubs class runs the add method
     #Club.add(sid, cid, quantity, price)
-    club_object = Club.new({"storeid" => sid,"clubid" => cid,"quantity" => quantity,"price" => price})
+    options = {"storeid" => sid, "clubid" => cid, "quantity" => quantity, "price" => price}
+    club_object = Club.new(options)
+    
     
     club_object.add
+    
+    
   end
   
   

@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Definitions Blog"
+date:   2015-06-29 13:24:45
+categories: jekyll update
+---
+
 ##Definitions
   - What is a class?
   A class is a collection of methods that deal with the same type of objects.  
